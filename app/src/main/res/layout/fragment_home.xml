@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.faishalbadri.fragmentrecyclerviewmvp.ui.Home.HomeFragment">
+
+  <!-- TODO: Update blank fragment layout -->
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Vertical"
+        android:id="@+id/txt"
+        />
+
+      <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txt"
+        android:id="@+id/rvIsi"/>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Horizontal"
+        android:padding="5dp"
+        android:layout_below="@+id/rvIsi"
+        android:layout_marginTop="10dp"
+        android:id="@+id/txtt"
+        />
+
+      <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txtt"
+        android:id="@+id/rvIsi_Horizontal"/>
+
+    </RelativeLayout>
+
+  </ScrollView>
+
+</RelativeLayout>
