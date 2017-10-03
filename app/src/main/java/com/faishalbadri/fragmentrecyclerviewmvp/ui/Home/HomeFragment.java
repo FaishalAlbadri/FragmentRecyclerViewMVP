@@ -55,6 +55,8 @@ public class HomeFragment extends Fragment implements HomeContract.View,HomeCont
 
     rvIsi = (RecyclerView)v.findViewById(R.id.rvIsi);
     rvIsi_Horizontal = (RecyclerView)v.findViewById(R.id.rvIsi_Horizontal);
+    rvIsi.setNestedScrollingEnabled(false);
+    rvIsi_Horizontal.setNestedScrollingEnabled(false);
 
     homePresenterHorizontal = new HomePresenterHorizontal(HomeRepoInject.provideToHomeRepo(getActivity()));
     homePresenterHorizontal.onAttachView(this);

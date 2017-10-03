@@ -15,6 +15,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.MemoryCategory;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.RequestOptions;
 import com.faishalbadri.fragmentrecyclerviewmvp.R;
 import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoHome;
@@ -22,6 +26,7 @@ import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoHome.IsiBean;
 import com.faishalbadri.fragmentrecyclerviewmvp.ui.Detail.DetailActivity;
 import com.faishalbadri.fragmentrecyclerviewmvp.ui.Home.HomeAdapter.ViewHolder;
 import com.faishalbadri.fragmentrecyclerviewmvp.util.Server;
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 /**
@@ -48,9 +53,13 @@ public class HomeAdapter extends RecyclerView.Adapter<ViewHolder> {
   @Override
   public void onBindViewHolder(final ViewHolder holder, int position) {
     final IsiBean listitem = data.get(position);
+    RequestOptions options = new RequestOptions()
+        .fitCenter()
+        .format(DecodeFormat.PREFER_ARGB_8888)
+        .override(100,100);
     Glide.with(context)
         .load(Server.BASE_IMG + listitem.getIsi_gambar())
-        .apply(RequestOptions.noAnimation())
+        .apply(options)
         .into(holder.img);
     holder.txtJudul.setText(listitem.getIsi_nama());
     holder.cv.setOnClickListener(new OnClickListener() {
@@ -85,4 +94,5 @@ public class HomeAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
   }
 
+ 
 }
