@@ -19,6 +19,9 @@ import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoHome.IsiBean;
 import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoKategori;
 import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoKategori.KategoriBean;
 import com.faishalbadri.fragmentrecyclerviewmvp.di.HomeRepoInject;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,5 +129,4 @@ public class HomeFragment extends Fragment implements HomeContract.View,HomeCont
   public void onError(String msg) {
     Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
   }
-
 }

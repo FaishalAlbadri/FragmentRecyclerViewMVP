@@ -15,12 +15,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.faishalbadri.fragmentrecyclerviewmvp.R;
 import com.faishalbadri.fragmentrecyclerviewmvp.ui.Home.HomeFragment;
 import com.faishalbadri.fragmentrecyclerviewmvp.ui.Kategori.KategoriFragment;
 import com.faishalbadri.fragmentrecyclerviewmvp.util.ActivityUtil;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class HomeActivity extends AppCompatActivity
     implements OnNavigationItemSelectedListener{
@@ -28,6 +33,7 @@ public class HomeActivity extends AppCompatActivity
   ActivityUtil activityUtil;
   @BindView(R.id.container)
   FrameLayout container;
+  private AdView mAdView;
 
 
   @Override
@@ -38,6 +44,45 @@ public class HomeActivity extends AppCompatActivity
     navigationAndToolbar();
     activityUtil = ActivityUtil.getInstance(getApplicationContext());
     activityUtil.addFragment(getSupportFragmentManager(), R.id.container, HomeFragment.instance());
+    mAdView = (AdView) findViewById(R.id.adView);
+    AdRequest adRequest = new AdRequest.Builder()
+        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+        .build();
+
+    mAdView.loadAd(adRequest);
+
+    mAdView.setAdListener(new AdListener() {
+
+      @Override
+      public void onAdLoaded() {
+        super.onAdLoaded();
+        Toast.makeText(HomeActivity.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
+      }
+
+      @Override
+      public void onAdOpened() {
+        super.onAdOpened();
+        Toast.makeText(HomeActivity.this, "onAdOpened()", Toast.LENGTH_SHORT).show();
+      }
+
+      @Override
+      public void onAdClosed() {
+        super.onAdClosed();
+        Toast.makeText(HomeActivity.this, "onAdClosed()", Toast.LENGTH_SHORT).show();
+      }
+
+      @Override
+      public void onAdFailedToLoad(int i) {
+        super.onAdFailedToLoad(i);
+        Toast.makeText(HomeActivity.this, "onAdFailedToLoad()", Toast.LENGTH_SHORT).show();
+      }
+
+      @Override
+      public void onAdLeftApplication() {
+        super.onAdLeftApplication();
+        Toast.makeText(HomeActivity.this, "onAdLeftApplication()", Toast.LENGTH_SHORT).show();
+      }
+    });
 
   }
 
@@ -111,5 +156,29 @@ public class HomeActivity extends AppCompatActivity
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  @Override
+  public void onPause() {
+    if (mAdView != null) {
+      mAdView.pause();
+    }
+    super.onPause();
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (mAdView != null) {
+      mAdView.resume();
+    }
+  }
+
+  @Override
+  public void onDestroy() {
+    if (mAdView != null) {
+      mAdView.destroy();
+    }
+    super.onDestroy();
   }
 }
