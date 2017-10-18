@@ -69,6 +69,7 @@ public class HomeAdapter extends RecyclerView.Adapter<ViewHolder> {
         .putExtra("nama",listitem.getIsi_nama())
         .putExtra("img",listitem.getIsi_gambar())
         .putExtra("ket",listitem.getIsi_keterangan()));
+        ((Activity)context).overridePendingTransition(R.anim.slide_from_right,R.anim.slide_from_right);
 //        ((Activity) context).finish();
       }
     });

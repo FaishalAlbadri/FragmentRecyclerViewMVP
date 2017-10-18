@@ -1,6 +1,9 @@
 package com.faishalbadri.fragmentrecyclerviewmvp.ui;
 
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
@@ -10,6 +13,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
+import android.transition.TransitionInflater;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +25,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.faishalbadri.fragmentrecyclerviewmvp.R;
+import com.faishalbadri.fragmentrecyclerviewmvp.ui.Detail.DetailActivity;
 import com.faishalbadri.fragmentrecyclerviewmvp.ui.Home.HomeFragment;
 import com.faishalbadri.fragmentrecyclerviewmvp.ui.Kategori.KategoriFragment;
 import com.faishalbadri.fragmentrecyclerviewmvp.util.ActivityUtil;
@@ -45,10 +52,7 @@ public class HomeActivity extends AppCompatActivity
     activityUtil = ActivityUtil.getInstance(getApplicationContext());
     activityUtil.addFragment(getSupportFragmentManager(), R.id.container, HomeFragment.instance());
     mAdView = (AdView) findViewById(R.id.adView);
-    AdRequest adRequest = new AdRequest.Builder()
-        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-        .build();
-
+    AdRequest adRequest = new AdRequest.Builder().build();
     mAdView.loadAd(adRequest);
 
     mAdView.setAdListener(new AdListener() {
@@ -83,7 +87,16 @@ public class HomeActivity extends AppCompatActivity
         Toast.makeText(HomeActivity.this, "onAdLeftApplication()", Toast.LENGTH_SHORT).show();
       }
     });
+  }
 
+  private void setupTransitionAnimation() {
+    DetailActivity detailActivity = new DetailActivity();
+    Slide slide = new Slide(Gravity.LEFT);
+    slide.setDuration(1000);
+    detailActivity.getWindow().setEnterTransition(slide);
+    detailActivity.getWindow().setReturnTransition(slide);
+    detailActivity.getWindow().setAllowEnterTransitionOverlap(false);
+    detailActivity.getWindow().setAllowReturnTransitionOverlap(false);
   }
 
   private void navigationAndToolbar() {
@@ -133,7 +146,7 @@ public class HomeActivity extends AppCompatActivity
 
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
-  public boolean onNavigationItemSelected(MenuItem item) {
+  public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     // Handle navigation view item clicks here.
     int id = item.getItemId();
 

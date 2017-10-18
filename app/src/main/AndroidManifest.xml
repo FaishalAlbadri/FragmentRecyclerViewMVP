@@ -28,7 +28,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".ui.Detail.DetailActivity" />
+    <activity android:name=".ui.Detail.DetailActivity" android:theme="@style/AppTheme.NoActionBar.swipe"/>
     <activity android:name=".ui.ListKategori.ListKategoriActivity"/>
 
     <activity android:name="com.google.android.gms.ads.AdActivity"
