@@ -3,6 +3,7 @@ package com.faishalbadri.fragmentrecyclerviewmvp.ui.Home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -24,6 +25,7 @@ import com.faishalbadri.fragmentrecyclerviewmvp.R;
 import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoHome;
 import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoHome.IsiBean;
 import com.faishalbadri.fragmentrecyclerviewmvp.ui.Detail.DetailActivity;
+import com.faishalbadri.fragmentrecyclerviewmvp.ui.Detail.DetailFragment;
 import com.faishalbadri.fragmentrecyclerviewmvp.ui.Home.HomeAdapter.ViewHolder;
 import com.faishalbadri.fragmentrecyclerviewmvp.util.Server;
 import java.lang.annotation.Annotation;
@@ -65,12 +67,17 @@ public class HomeAdapter extends RecyclerView.Adapter<ViewHolder> {
     holder.cv.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("img",listitem.getIsi_gambar());
+        DetailFragment detailFragment = new DetailFragment();
+        detailFragment.setArguments(bundle);
+
         v.getContext().startActivity(new Intent(v.getContext(), DetailActivity.class)
         .putExtra("nama",listitem.getIsi_nama())
         .putExtra("img",listitem.getIsi_gambar())
         .putExtra("ket",listitem.getIsi_keterangan()));
         ((Activity)context).overridePendingTransition(R.anim.slide_from_right,R.anim.slide_from_right);
-//        ((Activity) context).finish();
       }
     });
   }

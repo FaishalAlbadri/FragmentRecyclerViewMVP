@@ -12,6 +12,8 @@ import java.util.List;
 public class HomeContract {
 
   public interface View {
+
+
     void onSucces(List<IsiBean> data, String msg);
     void onError(String msg);
   }

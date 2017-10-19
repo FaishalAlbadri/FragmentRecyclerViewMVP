@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,18 +31,20 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements HomeContract.View,HomeContract.ViewHorizontal {
+public class HomeFragment extends Fragment implements HomeContract.View,
+    HomeContract.ViewHorizontal {
 
 
-  RecyclerView rvIsi,rvIsi_Horizontal;
+  RecyclerView rvIsi, rvIsi_Horizontal;
 
   public HomeFragment() {
     // Required empty public constructor
   }
 
-  public static HomeFragment instance(){
+  public static HomeFragment instance() {
     return new HomeFragment();
   }
+
   HomePresenterHorizontal homePresenterHorizontal;
   HomePresenter homePresenter;
   ArrayList<IsiBean> list_data;
@@ -56,48 +60,52 @@ public class HomeFragment extends Fragment implements HomeContract.View,HomeCont
     // Inflate the layout for this fragment
     View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-    rvIsi = (RecyclerView)v.findViewById(R.id.rvIsi);
-    rvIsi_Horizontal = (RecyclerView)v.findViewById(R.id.rvIsi_Horizontal);
+    rvIsi = (RecyclerView) v.findViewById(R.id.rvIsi);
+    rvIsi_Horizontal = (RecyclerView) v.findViewById(R.id.rvIsi_Horizontal);
     rvIsi.setNestedScrollingEnabled(false);
     rvIsi_Horizontal.setNestedScrollingEnabled(false);
 
-    homePresenterHorizontal = new HomePresenterHorizontal(HomeRepoInject.provideToHomeRepo(getActivity()));
+    homePresenterHorizontal = new HomePresenterHorizontal(
+        HomeRepoInject.provideToHomeRepo(getActivity()));
     homePresenterHorizontal.onAttachView(this);
 
     homePresenter = new HomePresenter(HomeRepoInject.provideToHomeRepo(getActivity()));
     homePresenter.onAttachView(this);
 
     list_data = new ArrayList<>();
-    homeAdapter = new HomeAdapter(getActivity(),list_data);
+    homeAdapter = new HomeAdapter(getActivity(), list_data);
 
     list_horizontal = new ArrayList<>();
-    homeAdapterHorizontal = new HomeAdapterHorizontal(getActivity(),list_horizontal);
+    homeAdapterHorizontal = new HomeAdapterHorizontal(getActivity(), list_horizontal);
 
+    int resId = R.anim.layout_animation_fall_down;
+    LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getActivity(), resId);
     LinearLayoutManager llm = new LinearLayoutManager(getActivity());
     llm.setOrientation(LinearLayoutManager.VERTICAL);
     rvIsi.setLayoutManager(llm);
     rvIsi.setAdapter(homeAdapter);
+    rvIsi.setLayoutAnimation(animation);
 
     LinearLayoutManager llmH = new LinearLayoutManager(getActivity());
     llmH.setOrientation(LinearLayoutManager.HORIZONTAL);
     rvIsi_Horizontal.setLayoutManager(llmH);
     rvIsi_Horizontal.setAdapter(homeAdapterHorizontal);
 
-    if (savedInstanceState != null){
+    if (savedInstanceState != null) {
       ArrayList<PojoHome.IsiBean> dataa = savedInstanceState.getParcelableArrayList(simpan);
       this.list_data.clear();
       this.list_data.addAll(dataa);
       homeAdapter.notifyDataSetChanged();
-
-      ArrayList<PojoKategori.KategoriBean> data_horizontal = savedInstanceState.getParcelableArrayList(simpan_h);
+      ArrayList<PojoKategori.KategoriBean> data_horizontal = savedInstanceState
+          .getParcelableArrayList(simpan_h);
       this.list_horizontal.clear();
       this.list_horizontal.addAll(data_horizontal);
       homeAdapterHorizontal.notifyDataSetChanged();
-      Log.i("asd","ini if");
-    }else {
+      Log.i("asd", "ini if");
+    } else {
       homePresenterHorizontal.getData();
       homePresenter.getData();
-      Log.i("asd","ini else");
+      Log.i("asd", "ini else");
     }
     return v;
   }
@@ -105,8 +113,8 @@ public class HomeFragment extends Fragment implements HomeContract.View,HomeCont
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    outState.putParcelableArrayList(simpan,list_data);
-    outState.putParcelableArrayList(simpan_h,list_horizontal);
+    outState.putParcelableArrayList(simpan, list_data);
+    outState.putParcelableArrayList(simpan_h, list_horizontal);
   }
 
   @Override
@@ -129,4 +137,5 @@ public class HomeFragment extends Fragment implements HomeContract.View,HomeCont
   public void onError(String msg) {
     Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
   }
+
 }

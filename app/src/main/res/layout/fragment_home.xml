@@ -19,6 +19,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/rvIsi_Horizontal"
         android:nestedScrollingEnabled="false"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
         android:id="@+id/rvIsi"/>
 
 

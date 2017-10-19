@@ -14,6 +14,5 @@ public class App extends Application {
   public void onCreate() {
     super.onCreate();
     MobileAds.initialize(this, "ca-app-pub-6242493810500826/9429485582");
-    WxSwipeBackActivityManager.getInstance().init(this);
   }
 }

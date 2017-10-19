@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 import com.faishalbadri.fragmentrecyclerviewmvp.R;
 import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoKategori;
@@ -50,6 +52,7 @@ public class KategoriFragment extends Fragment implements KategoriContract.View 
 
     list_data = new ArrayList<>();
     kategoriAdapter = new KategoriAdapter(getActivity(),list_data);
+
 
     LinearLayoutManager llm = new LinearLayoutManager(getActivity());
     llm.setOrientation(LinearLayoutManager.VERTICAL);
