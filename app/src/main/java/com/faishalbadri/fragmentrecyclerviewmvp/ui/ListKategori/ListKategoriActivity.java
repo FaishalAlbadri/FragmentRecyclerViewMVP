@@ -31,6 +31,7 @@ public class ListKategoriActivity extends AppCompatActivity implements ListKateg
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_list_kategori);
     ButterKnife.bind(this);
+
     id = getIntent().getStringExtra("id");
     nama = getIntent().getStringExtra("nama");
     Log.i("id",id);

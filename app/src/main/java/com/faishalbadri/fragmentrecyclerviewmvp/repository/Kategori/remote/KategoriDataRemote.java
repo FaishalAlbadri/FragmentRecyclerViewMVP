@@ -45,7 +45,7 @@ public class KategoriDataRemote implements KategoriDataResource {
               kategoriCallBack.onDataEmpty(
                   context.getString(R.string.gagal));
             } else {
-              kategoriCallBack.onSucces(pojoKategori.getKategori(), context.getString(R.string.succes));
+                kategoriCallBack.onSucces(pojoKategori.getKategori(), context.getString(R.string.succes));
             }
           }
         }, new ErrorListener() {

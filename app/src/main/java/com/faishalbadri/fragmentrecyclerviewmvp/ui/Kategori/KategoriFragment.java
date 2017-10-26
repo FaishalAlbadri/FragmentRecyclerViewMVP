@@ -2,6 +2,7 @@ package com.faishalbadri.fragmentrecyclerviewmvp.ui.Kategori;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,9 @@ import com.faishalbadri.fragmentrecyclerviewmvp.R;
 import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoKategori;
 import com.faishalbadri.fragmentrecyclerviewmvp.data.PojoKategori.KategoriBean;
 import com.faishalbadri.fragmentrecyclerviewmvp.di.KategoriInject;
+import com.faishalbadri.fragmentrecyclerviewmvp.repository.Kategori.KategoriDataResource;
+import com.faishalbadri.fragmentrecyclerviewmvp.repository.Kategori.KategoriRepository;
+import com.faishalbadri.fragmentrecyclerviewmvp.repository.Kategori.remote.KategoriDataRemote;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +44,7 @@ public class KategoriFragment extends Fragment implements KategoriContract.View 
   ArrayList<PojoKategori.KategoriBean> list_data;
   KategoriAdapter kategoriAdapter;
   private static final String simpan = "simpanKat";
+  String id;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,

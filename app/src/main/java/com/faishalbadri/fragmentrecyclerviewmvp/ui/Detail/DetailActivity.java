@@ -7,6 +7,9 @@ import android.transition.Slide;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -41,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
     setContentView(R.layout.activity_detail);
     ButterKnife.bind(this);
     containerDetail.setVisibility(View.GONE);
@@ -63,6 +67,8 @@ public class DetailActivity extends AppCompatActivity {
       public void onClick(View v) {
         containerDetail.setVisibility(View.VISIBLE);
         setImageClick();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         toolbar.setVisibility(View.INVISIBLE);
         imgDetail.setVisibility(View.INVISIBLE);
         wvDetail.setVisibility(View.INVISIBLE);
@@ -108,6 +114,8 @@ public class DetailActivity extends AppCompatActivity {
   @Override
   public void onBackPressed() {
     super.onBackPressed();
+    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
     containerDetail.setVisibility(View.GONE);
     toolbar.setVisibility(View.VISIBLE);
     imgDetail.setVisibility(View.VISIBLE);

@@ -11,8 +11,16 @@
     android:id="@+id/imgDetailFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionName="coba"
+    android:layout_centerInParent="true"
     android:scaleType="centerCrop"
-    android:layout_centerInParent="true" />
+    android:transitionName="coba" />
 
+  <ImageView
+    android:id="@+id/btnDownload"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_margin="15dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:src="@drawable/download" />
 </RelativeLayout>
