@@ -1,5 +1,6 @@
 package com.faishalbadri.fragmentrecyclerviewmvp.ui.Kategori;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -29,6 +30,7 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ViewHo
 
   Context context;
   List<KategoriBean> data;
+  int color;
 
   public KategoriAdapter(Context context, List<KategoriBean> data) {
     this.context = context;
@@ -45,6 +47,10 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ViewHo
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
     final PojoKategori.KategoriBean listitem = data.get(position);
+    color = ((Activity) context).getResources().getColor(R.color.colorPrimary);
+    if (listitem.getKategori_nama().equalsIgnoreCase("perpustakaan")){
+      holder.txtJudul.setTextColor(color);
+    }
     Glide.with(context)
         .load(Server.BASE_IMG + listitem.getKategori_gambar())
         .apply(RequestOptions.noAnimation())
